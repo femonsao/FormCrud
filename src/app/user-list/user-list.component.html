@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="content">
+    <div class="btn-actions">
+      <button mat-raised-button [routerLink]="['user-create']" color="primary">
+        Novo usúario
+      </button>
+    </div>
+    <table mat-table [dataSource]="userData" class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef>Id</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">{{ element.userName }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef>Email</th>
+        <td mat-cell *matCellDef="let element">{{ element.userEmail }}</td>
+      </ng-container>
+
+      <div>
+        <ng-container matColumnDef="options">
+          <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Options</th>
+          <td class="options-colun" mat-cell *matCellDef="let element">
+            <div>
+              <button mat-button (click)="gotToEditUser(element.id)"><mat-icon aria-hidden="false">edit</mat-icon></button>
+              <button mat-button (click)="deleteUser(element.id)"><mat-icon aria-hidden="false" style="color: red;" >close</mat-icon></button>
+            </div>
+          </td>
+        </ng-container>
+      </div>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+</div>

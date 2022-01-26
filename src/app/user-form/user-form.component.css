@@ -1,0 +1,53 @@
+.container-menu {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.card-container {
+  min-width: 60%;
+  min-height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
+mat-form-field {
+  width: 500px;
+}
+.container-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.form-fild {
+  width: 500px !important;
+}
+.actions-btn-container{
+  width: 20rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+
+}
+.opt-container{
+  width: 400px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.title{
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 15px;
+}

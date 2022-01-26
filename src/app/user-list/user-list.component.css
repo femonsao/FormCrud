@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+.content{
+  width: 99%;
+  align-items: center;
+  justify-content: center;
+}
+.btn-actions {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  width: 100%;
+}
+table {
+  width: 100%;
+  margin-left: 7px;
+}
+.options-colun{
+ text-align: center;
+ width: 200px;
+}
