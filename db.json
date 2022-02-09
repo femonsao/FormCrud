@@ -1,11 +1,6 @@
 {
   "user": [
     {
-      "userName": "Felipe",
-      "userEmail": "femonsao@gmail.com",
-      "id": 1
-    },
-    {
       "id": 2,
       "userName": "Renato borges",
       "userEmail": "teste@gmail.com"
@@ -14,6 +9,16 @@
       "id": 4,
       "userName": "Felipe MAc",
       "userEmail": "fellllmac@gmail.com"
+    },
+    {
+      "id": 5,
+      "userName": "natalia",
+      "userEmail": "na@na.com.br"
+    },
+    {
+      "id": 6,
+      "userName": "snack",
+      "userEmail": "sn@snakc.com"
     }
   ]
 }

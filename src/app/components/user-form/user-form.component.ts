@@ -3,6 +3,7 @@ import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { User } from '../../interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-form',
@@ -21,7 +22,8 @@ export class UserFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -44,15 +46,22 @@ export class UserFormComponent implements OnInit {
   public Salvar() {
 
     if (this.isCreate) {
-      this.userService.createUser(this.form.value).pipe().subscribe(data => {
-        console.log(data)
-      })
+      this.userService.createUser(this.form.value).pipe().subscribe(() => {
+        this.snackBar.open('Usuário criado com sucesso!', 'x', {
+          panelClass: ['sucess-snack'],
+          horizontalPosition: 'right'
+        });
+      });
     } else if (this.isEdit) {
       this.userService.
         updateUser(this.form.value.id, this.form.value)
-          .pipe()
-            .subscribe(data => {
-      });
+        .pipe()
+        .subscribe(() => {
+          this.snackBar.open('Usuário atualizado com sucesso!', 'x', {
+              panelClass: ['sucess-snack'],
+              horizontalPosition: 'right'
+            });
+        });
     }
     window.history.back();
   }
