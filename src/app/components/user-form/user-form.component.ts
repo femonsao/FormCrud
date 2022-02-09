@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { UserService } from './../service/user.service';
+import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { User } from '../interface';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { User } from '../../interface';
 
 @Component({
   selector: 'app-user-form',
@@ -22,48 +22,52 @@ export class UserFormComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute
-  ) {
-  }
+  ) { }
 
   ngOnInit(): void {
     this.initForm();
     this.checkUrl();
   }
 
-  public initForm(){
-   this.form = this.formBuilder.group({
-     userName: [null, Validators.required],
-     userEmail: [null, Validators.email]
-   });
-   console.log('control init', this.form.controls)
+  public initForm() {
+    this.form = this.formBuilder.group({
+      id: null,
+      userName: [null, Validators.required],
+      userEmail: [null, Validators.email]
+    });
   }
-
 
   public backPage() {
     window.history.back();
   }
+
   public Salvar() {
 
-    this.userService.createUser(this.form.value).pipe().subscribe(data => {
-      console.log(data)
-    })
-
+    if (this.isCreate) {
+      this.userService.createUser(this.form.value).pipe().subscribe(data => {
+        console.log(data)
+      })
+    } else if (this.isEdit) {
+      this.userService.
+        updateUser(this.form.value.id, this.form.value)
+          .pipe()
+            .subscribe(data => {
+      });
+    }
     window.history.back();
   }
+
   public Cancelar() {
     window.history.back();
   }
 
   private checkUrl() {
     if (this.router.url.includes('user-create')) {
-      console.log('create');
       this.isCreate = true;
     } else if (this.router.url.includes('user-edit')) {
-      console.log('edit')
       const userId = this.route.snapshot.paramMap.get('id');
       this.userService.getUser(userId).subscribe(data => {
-        console.log('data' , data)
-        this.userData =  data;
+        this.userData = data;
         this.populateForm(this.userData);
         this.isEdit = true;
       });
@@ -71,9 +75,8 @@ export class UserFormComponent implements OnInit {
   }
 
   private populateForm(userData: any) {
-    console.log('controls', this.form.controls);
-    console.log('populate', userData);
     this.form.patchValue({
+      id: userData?.id,
       userName: userData.userName,
       userEmail: userData.userEmail
     });

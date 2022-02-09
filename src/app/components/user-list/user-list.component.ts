@@ -1,7 +1,7 @@
 import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 
-import { UserService } from '../service/user.service';
+import { UserService } from '../../service/user.service';
 
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
