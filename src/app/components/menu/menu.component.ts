@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -10,13 +11,29 @@ export class MenuComponent implements OnInit {
   public isCreate: boolean = false;
   public isEdit: boolean = false;
 
-  constructor() { }
+  constructor(
+    private route: Router,
+  ) { }
 
   ngOnInit(): void {
+   this.checkActualRoute()
   }
 
   public backPage(){
-    window.history.back();
+    this.route.navigateByUrl('');
+  }
+
+  public checkActualRoute(){
+    if (this.route.url.includes('create')){
+      this.isCreate = true;
+      this.isEdit = false;
+    }else if (this.route.url.includes('edit')){
+      this.isCreate = false;
+      this.isEdit = true;
+    }else{
+      this.isCreate = false;
+      this.isEdit = false;
+    }
   }
 
 }

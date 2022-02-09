@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserService } from '../../service/user.service';
 
-import { Observable, of } from 'rxjs';
-import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +19,7 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
