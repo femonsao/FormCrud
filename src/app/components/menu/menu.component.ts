@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
+  public isCreate: boolean = false;
+  public isEdit: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public backPage(){
+    window.history.back();
   }
 
 }

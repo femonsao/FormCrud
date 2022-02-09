@@ -1,1 +1,15 @@
-<p>menu works!</p>
+<div class="container">
+  <div class="btn-actions">
+    <button mat-raised-button [routerLink]="['user-create']" color="primary">
+      Novo usúario
+    </button>
+
+    <span>Usúarios</span>
+  </div>
+
+  <div class="container-menu">
+    <button mat-raised-button (click)="backPage()" color="primary">Voltar</button>
+    <h2 class="title" *ngIf="isCreate">Cadastrar usuário</h2>
+    <h2 class="title" *ngIf="isEdit">Editar usuário</h2>
+  </div>
+</div>

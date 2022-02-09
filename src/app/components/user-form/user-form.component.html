@@ -1,8 +1,4 @@
-<div class="container-menu">
-  <button mat-raised-button (click)="backPage()" color="primary">Voltar</button>
-  <h2 class="title" *ngIf="isCreate">Cadastrar usuário</h2>
-  <h2 class="title" *ngIf="isEdit">Editar usuário</h2>
-</div>
+<app-menu></app-menu>
 <div class="container-form">
   <mat-card class="card-container mat-elevation-z6">
     <form [formGroup]="form">
