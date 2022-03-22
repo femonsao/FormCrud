@@ -1,5 +1,12 @@
-export interface User{
+export interface IUser{
   id?: number,
   name: string,
-  email: string
+  gitHubUrl: string,
+  country?: string,
+  state?: string,
+  city?: string,
+  email: string,
+  phone: number,
+  userEmail: string,
+  userPhoto: string
 }

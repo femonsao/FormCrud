@@ -14,7 +14,7 @@
                   formControlName="userName"
                   required
                 />
-                <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+                <mat-error *ngIf="form.invalid"></mat-error>
               </mat-form-field>
             </div>
             <div>
@@ -29,14 +29,51 @@
                 <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
               </mat-form-field>
             </div>
+            <div>
+              <mat-form-field appearance="fill">
+                <label>Github</label>
+                <input
+                  matInput
+                  placeholder="Your github"
+                  formControlName="gitHubUrl"
+                  required
+                />
+                <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="fill">
+                <label>Phone</label>
+                <input
+                  type="tel"
+                  matInput
+                  placeholder="Your Phone"
+                  formControlName="phone"
+                  required
+                />
+                <!-- <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error> -->
+              </mat-form-field>
+            </div>
+            <div class="file-container">
+              <label class="custom-file-input mat-elevation-z10" for="arquivo"
+                >Selecione uma foto</label
+              >
+              <input
+                (change)="getPhoto($event)"
+                type="file"
+                name="arquivo"
+                id="arquivo"
+                hidden
+              />
+            </div>
           </div>
         </form>
 
         <div class="opt-container">
-          <button mat-raised-button (click)="Salvar()" color="primary">
+          <button mat-raised-button (click)="save()" color="primary">
             Salvar
           </button>
-          <button mat-raised-button (click)="Cancelar()" color="warn">
+          <button mat-raised-button (click)="goToList()" color="warn">
             Cancelar
           </button>
         </div>

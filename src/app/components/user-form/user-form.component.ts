@@ -2,8 +2,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './../../service/user.service';
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { User } from '../../interface';
+import { IUser } from '../../interface';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-user-form',
@@ -12,10 +14,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserFormComponent implements OnInit {
 
-  private userData: User = { name: '', email: '' };
+  private userData: IUser | undefined;
   public form!: FormGroup;
   public isCreate: boolean = false;
   public isEdit: boolean = false;
+  private fotoData: any;
 
 
   constructor(
@@ -35,39 +38,88 @@ export class UserFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: null,
       userName: [null, Validators.required],
-      userEmail: [null, Validators.email]
+      gitHubUrl: null,
+      country: null,
+      state: null,
+      city: null,
+      phone: null,
+      userEmail: [null, Validators.email],
+      userPhoto: null
     });
   }
 
-  public backPage() {
-    window.history.back();
+  public async getPhoto(photoEvent: any) {
+    const file = photoEvent.target.files[0]
+    this.fotoData = await this.convertToBase64(file);
+    console.log(this.fotoData)
   }
 
-  public Salvar() {
+  private convertToBase64(photoFile: any) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(photoFile)
+      reader.onload = () => resolve(reader.result)
+      reader.onerror = error => reject(error)
+    });
+  }
 
-    if (this.isCreate) {
-      this.userService.createUser(this.form.value).pipe().subscribe(() => {
+  public goToList() {
+    this.router.navigateByUrl('')
+  }
+
+  public save() {
+    const data = {
+      userName: this.form?.get('userName')?.value,
+      gitHubUrl: this.form.get('gitHubUrl')?.value,
+      country: this.form.get('')?.value,
+      state: this.form.get('')?.value,
+      city: this.form.get('')?.value,
+      phone: this.form.get('phone')?.value,
+      userEmail: this.form.get('userEmail')?.value,
+      userPhoto:  this.fotoData
+
+    }
+    this.create(data);
+    this.goToList();
+  }
+
+  private create(data: any) {
+    this.userService.createUser(data)
+      .pipe(
+        catchError(() => {
+          this.snackBar
+            .open('Erro ao atualizar usuário!', 'x', {
+              panelClass: ['error-snack'],
+              horizontalPosition: 'right'
+            })
+          return of();
+        }))
+      .subscribe(() => {
         this.snackBar.open('Usuário criado com sucesso!', 'x', {
           panelClass: ['sucess-snack'],
           horizontalPosition: 'right'
         });
       });
-    } else if (this.isEdit) {
-      this.userService.
-        updateUser(this.form.value.id, this.form.value)
-        .pipe()
-        .subscribe(() => {
-          this.snackBar.open('Usuário atualizado com sucesso!', 'x', {
-              panelClass: ['sucess-snack'],
-              horizontalPosition: 'right'
-            });
-        });
-    }
-    window.history.back();
   }
 
-  public Cancelar() {
-    window.history.back();
+  private edit(data: any) {
+    this.userService.
+      updateUser(this.form.value.id, this.form.value)
+      .pipe(
+        catchError(() => {
+          this.snackBar
+            .open('Erro ao atualizar usuário!', 'x', {
+              panelClass: ['error-snack'],
+              horizontalPosition: 'right'
+            })
+          return of();
+        }))
+      .subscribe(() => {
+        this.snackBar.open('Usuário atualizado com sucesso!', 'x', {
+          panelClass: ['sucess-snack'],
+          horizontalPosition: 'right'
+        });
+      });
   }
 
   private checkUrl() {
@@ -87,7 +139,13 @@ export class UserFormComponent implements OnInit {
     this.form.patchValue({
       id: userData?.id,
       userName: userData.userName,
-      userEmail: userData.userEmail
+      userEmail: userData.userEmail,
+      gitHubUrl: userData?.gitHubUrl,
+      phone: userData?.phone,
+      country: userData?.country,
+      city: userData?.photo,
+      state: userData?.state,
+      userPhoto: userData?.userPhoto,
     });
   }
 }

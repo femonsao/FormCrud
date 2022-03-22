@@ -22,6 +22,7 @@
           <th style="text-align: center;" mat-header-cell *matHeaderCellDef>Options</th>
           <td class="options-colun" mat-cell *matCellDef="let element">
             <div>
+              <button mat-button (click)="gotToViewUser(element.id)"><mat-icon aria-hidden="false">search</mat-icon></button>
               <button mat-button (click)="gotToEditUser(element.id)"><mat-icon aria-hidden="false">edit</mat-icon></button>
               <button mat-button (click)="deleteUser(element.id)"><mat-icon aria-hidden="false" style="color: red;" >close</mat-icon></button>
             </div>

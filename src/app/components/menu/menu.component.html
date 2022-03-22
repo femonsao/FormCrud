@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="content" *ngIf=" !isCreate && !isEdit">
+  <div class="content" *ngIf=" !isCreate && !isEdit && isList">
     <button mat-raised-button [routerLink]="['user-create']" color="primary">
       Novo usúario
     </button>
@@ -8,8 +8,9 @@
   </div>
 
   <div class="content">
-    <button  *ngIf="isCreate || isEdit" mat-raised-button (click)="backPage()" color="primary">Voltar</button>
+    <button  *ngIf="isCreate || isEdit || isView" mat-raised-button (click)="backPage()" color="primary">Voltar</button>
     <h2 class="title" *ngIf="isCreate">Cadastrar usuário</h2>
     <h2 class="title" *ngIf="isEdit">Editar usuário</h2>
+    <h2 class="title" *ngIf="isView">Perfil do usuário</h2>
   </div>
 </div>

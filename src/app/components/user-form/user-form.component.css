@@ -70,6 +70,23 @@ mat-form-field {
   margin-top: 30px;
   margin-bottom: 5% !important;
 }
+.file-container{
+  width: 100%;
+  height: 10%;
+}
+.custom-file-input{
+  background-color: #333;
+  width: 150px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  border-radius: 8px;
+}
+.custom-file-input:hover{
+  background-color: rgba(51, 51, 51, 0.693);
+}
 
 .title{
   display: flex;

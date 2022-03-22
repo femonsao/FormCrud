@@ -13,8 +13,8 @@ import { Router} from '@angular/router';
 })
 
 export class UserListComponent implements OnInit {
-  displayedColumns: string[] = ['id','name', 'email' ,'options']
-  userData: any;
+ public displayedColumns: string[] = ['id','name', 'email' ,'options']
+ public userData: any;
 
 
   constructor(
@@ -42,7 +42,11 @@ export class UserListComponent implements OnInit {
   }
 
   public gotToEditUser(userId: number){
-    return this.router.navigateByUrl('user-edit/' + userId)
+    return this.router.navigateByUrl(`user-edit/${userId}`)
+  }
+
+  public gotToViewUser(userId: number){
+    return this.router.navigateByUrl(`user-view/${userId}`)
   }
 
   public deleteUser(userId: number){

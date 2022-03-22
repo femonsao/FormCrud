@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { UserViewComponent } from './components/user-view/user-view.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { MenuComponent } from './components/menu/menu.component';
     UserListComponent,
     UserFormComponent,
     MenuComponent,
+    UserViewComponent,
   ],
   imports: [
     BrowserModule,

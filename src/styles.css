@@ -3,6 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .sucess-snack{
-  background-color: rgb(92, 225, 92);
+  background-color: rgb(130, 230, 130);
+  color: #1f1f1f;
+}
+.error-snack{
+  background-color: rgb(247, 112, 112);
   color: #1f1f1f;
 }
