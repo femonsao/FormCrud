@@ -1,4 +1,4 @@
-import {  Component,  OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IUser } from 'src/app/interface';
@@ -14,7 +14,7 @@ export class UserViewComponent implements OnInit {
 
   public profilePicture = "https://avatars.githubusercontent.com/u/46978878?s=400&u=45f70463a23c18b1cc705b7f3499249793f017ad&v=4";
   private userId: any;
-  public userData!: IUser;
+  public userData!: any;
 
 
   constructor(
@@ -24,23 +24,22 @@ export class UserViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe(data => {
+      return this.userId = data.id
+    });
     this.getUser();
     console.log(this.userData);
   }
 
   public getUser() {
-    this.userId = this.activatedRoute.params.subscribe(data => {
-        this.userId = data.id
-    })
-    return this.userService.getUser(this.userId)
+    this.userService.getUser(this.userId)
       .pipe(
         catchError((e: any) =>
           of(console.log(e)
           )))
       .subscribe((data: any) => {
-        console.log(data)
-        this.userData = data;
-      })
+        return this.userData = data;
+      });
   }
 
 }
