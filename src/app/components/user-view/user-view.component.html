@@ -1,23 +1,17 @@
-<div style="padding-left: 20px;" >
-
+<div style="padding-left: 20px">
   <app-menu></app-menu>
 </div>
 
 <div class="container">
   <mat-card class="mat-card-content mat-elevation-z8">
     <div class="content">
-        <div class="first-content" >
-          <img
-            [src]="profilePicture"
-            alt="Profile Photo"
-            class="profile-image"
-          />
-          <div class="user-first-info">
-            <span>{{ userData?.name}}</span>
-            <span>{{ userData?.email }}</span>
-
-          </div>
+      <div class="first-content">
+        <img [src]="profilePicture" alt="Profile Photo" class="profile-image" />
+        <div class="user-first-info">
+          <span>{{ userData.userName }}</span>
+          <span>{{ userData.userEmail }}</span>
         </div>
+      </div>
     </div>
   </mat-card>
 </div>

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IUser } from 'src/app/interface';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { IUser } from 'src/app/interface';
 
 @Component({
   selector: 'app-user-view',
@@ -11,10 +11,9 @@ import { of } from 'rxjs';
   styleUrls: ['./user-view.component.css']
 })
 export class UserViewComponent implements OnInit {
-
-  public profilePicture = "https://avatars.githubusercontent.com/u/46978878?s=400&u=45f70463a23c18b1cc705b7f3499249793f017ad&v=4";
+  public profilePicture: string = '';
   private userId: any;
-  public userData!: any;
+  public userData: any = [];
 
 
   constructor(
@@ -23,23 +22,30 @@ export class UserViewComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.activatedRoute.params.subscribe(data => {
       return this.userId = data.id
     });
-    this.getUser();
-    console.log(this.userData);
+    this.userData = await this.getUser();
+    !this.userData.userPhoto ? this.profilePicture =  './../../../assets/img/user.png' : this.profilePicture = this.userData.userPhoto;
+
+
   }
 
-  public getUser() {
-    this.userService.getUser(this.userId)
-      .pipe(
-        catchError((e: any) =>
-          of(console.log(e)
-          )))
-      .subscribe((data: any) => {
-        return this.userData = data;
-      });
+  public getUser(): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.userService.getUser(this.userId)
+        .pipe(
+          catchError((e: any) =>
+            of(console.log(e),
+              reject(e)
+            )))
+        .subscribe((data: any) => {
+          resolve(
+            data
+          )
+        });
+    })
   }
 
 }

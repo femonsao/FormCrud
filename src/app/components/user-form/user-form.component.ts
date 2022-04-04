@@ -79,7 +79,7 @@ export class UserFormComponent implements OnInit {
       userPhoto:  this.fotoData
 
     }
-    this.create(data);
+    this.isCreate ? this.create(data) :  this.edit(data);
     this.goToList();
   }
 
@@ -103,8 +103,9 @@ export class UserFormComponent implements OnInit {
   }
 
   private edit(data: any) {
+    console.log(data);
     this.userService.
-      updateUser(this.form.value.id, this.form.value)
+      updateUser(this.form.value.id, data)
       .pipe(
         catchError(() => {
           this.snackBar
